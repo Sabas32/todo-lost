@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato";
+}
+:root {
+  --linear-back: linear-gradient(135deg, #153677, #4e085f);
+  --white: #fff;
+  --orange: #ff5945;
+  --text-color-one: #002765;
+  --text-color-two: #262626;
+  --gray: #edeef0;
+}
+body {
+  background: var(--linear-back);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100vh;
+}
+.to-do-contain {
+  background: var(--white);
+  width: max-content;
+  padding: 2em 1.5em;
+  border-radius: 7px;
+  height: max-content;
+  margin-top: 100px;
+  animation: 0.7s ease-in-out forwards fadeIn;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.to-do-contain h3 {
+  font-size: 18px;
+  color: var(--text-color-one);
+  font-weight: 800;
+}
+.to-do-contain .title {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.to-do-contain .title img {
+  height: 25px;
+  margin-left: 1em;
+}
+
+.addTask {
+  background: var(--gray);
+  display: flex;
+  border-radius: 20px;
+  /* padding: 20px; */
+  /* margin-top: 5em; */
+}
+.addTask input {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 1em 1.3em;
+  width: 210px;
+  font-family: "Nunito";
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-color-two);
+  width: 0;
+  animation: 0.7s ease-in-out forwards widthInc;
+  /* opacity: 0; */
+}
+@keyframes widthInc {
+  0% {
+    width: 0;
+  }
+  85% {
+    width: 250px;
+  }
+  100% {
+    width: 210px;
+  }
+}
+
+.addTask div {
+  width: 80px;
+  background: var(--orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: "Nunito";
+  color: var(--white);
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.tasks {
+  margin-top: 1.5em;
+  max-height: 202px;
+  min-height: 202px;
+  overflow-y: scroll;
+}
+.tasks::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+  /* height: 1em; */
+}
+.tasks::-webkit-scrollbar-thumb {
+  /* margin-left: .5em; */
+  border-radius: 10px;
+  background: var(--orange);
+}
+.tasks .task {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Nunito";
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  margin: 0.5em 0;
+  transform: translate3d(0, 100%, 0);
+  opacity: 0;
+  animation: 0.3s linear forwards moveIn calc(var(--i) * 100ms);
+}
+@keyframes moveIn {
+  from {
+    transform: translate3d(0, 30%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    /* transform: scale(1); */
+  }
+}
+.tasks .task input {
+  position: absolute;
+  visibility: hidden;
+}
+
+.tasks .task > div.checkbox::after {
+  /* background: url("images/unchecked.png"); */
+  background: url("images/unchecked.png");
+  background-repeat: repeat;
+  background-size: contain;
+  /* object-fit: contain; */
+  top: 50%;
+  height: 17px;
+  width: 17px;
+  position: relative;
+  transform: translate(0, -50%);
+  /* background: red; */
+  position: absolute;
+  content: "";
+  transition: 0.2s;
+}
+.tasks .task input:checked + div.checkbox::after {
+  background: red;
+  background: url("images/checked.png");
+  background-repeat: repeat;
+  background-size: contain;
+}
+.tasks .task input:checked + div.checkbox p {
+  /* color: red; */
+  /* background: red; */
+  text-decoration: line-through;
+  font-size: 12px;
+  opacity: 0.7;
+}
+.tasks .task div {
+  display: flex;
+  align-items: center;
+}
+.tasks .task div p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color-two);
+  margin-left: 2em;
+  /* color: var(--gray); */
+  /* color: red; */
+
+  font-family: "Nunito";
+  transition: 0.2s;
+}
+.tasks .task > div > img {
+  width: 17px;
+  /* aspect-ratio: 1/1; */
+  height: 17px;
+  margin-right: 0.5em;
+}
+.tasks .cancel {
+  font-size: 14px;
+  color: var(--text-color-two);
+  font-family: "Nunito";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  font-weight: 600;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+  z-index: 2;
+  transition: 0.5s;
+}
+
+.tasks .cancel:hover {
+  background: var(--gray);
+}
